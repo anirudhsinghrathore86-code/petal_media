@@ -17,35 +17,47 @@
     <!-- Custom Styles -->
     <style>
         :root {
-            --primary-pink: #FF69B4;
-            --primary-pink-2: #FF1493;
+            --primary-pink: #FF1493;
+            --primary-pink-2: #FF69B4;
             --primary-pink-3: #F5D0E0;
             --primary-pink-4: #FBE4EC;
             --primary-pink-5: #FFF0F5;
-            --primary-yellow: #FFD700;
-            --primary-yellow-2: #FFC107;
+            --primary-yellow: #FFBF00;
+            --primary-yellow-2: #FFD700;
             --text-dark: #3D3D3D;
             --text-light: #FFFFFF;
             --bg-dark: #4A3050;
             --bg-light: #FFF5F5;
             --accent-gold: #C9A96E;
             --border-thin: 1px solid rgba(0,0,0,0.06);
-            --footer-plum: #4A3050;
+            --footer-plum: #5B4A6A;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
             color: var(--text-dark);
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 50%, #FFF8F0 100%);
+            background: linear-gradient(135deg, #FFF0E6 0%, #FFF8F5 30%, #FFFFFF 60%, #FFF5F0 100%);
             overflow-x: hidden;
             line-height: 1.8;
+            min-height: 100vh;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             letter-spacing: 0.02em;
+        }
+
+        /* Responsive Font Sizes */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+        }
+        h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
+        }
+        h3 {
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
         }
 
         /* Grain Texture Overlay */
@@ -58,7 +70,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 9998;
-            opacity: 0.04;
+            opacity: 0.035;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
@@ -114,6 +126,7 @@
             color: var(--text-dark);
             border: 1px solid var(--text-dark);
             padding: 14px 32px;
+            min-height: 48px;
             font-size: 13px;
             font-weight: 500;
             text-transform: uppercase;
@@ -122,6 +135,9 @@
             position: relative;
             overflow: hidden;
             border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-primary::before {
@@ -134,16 +150,18 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 105, 180, 0.2),
-                rgba(255, 20, 147, 0.3),
-                rgba(255, 105, 180, 0.2),
+                rgba(255, 20, 147, 0.15),
+                rgba(255, 191, 0, 0.2),
+                rgba(255, 20, 147, 0.15),
                 transparent
             );
-            transition: left 0.6s ease;
+            animation: shimmer-primary 5s ease-in-out infinite;
         }
 
-        .btn-primary:hover::before {
-            left: 100%;
+        @keyframes shimmer-primary {
+            0% { left: -100%; }
+            40% { left: 100%; }
+            100% { left: 100%; }
         }
 
         .btn-primary:hover {
@@ -154,10 +172,11 @@
         }
 
         .btn-pink {
-            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-2) 100%);
+            background: linear-gradient(135deg, var(--primary-pink) 0%, #E0127F 100%);
             color: white;
             border: none;
             padding: 14px 32px;
+            min-height: 48px;
             font-size: 13px;
             font-weight: 500;
             text-transform: uppercase;
@@ -166,6 +185,9 @@
             border-radius: 30px;
             position: relative;
             overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-pink::before {
@@ -178,28 +200,77 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 255, 255, 0.3),
-                rgba(255, 255, 255, 0.5),
-                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.25),
+                rgba(255, 191, 0, 0.4),
+                rgba(255, 255, 255, 0.25),
                 transparent
             );
-            animation: shimmer 3s ease-in-out infinite;
+            animation: shimmer 5s ease-in-out infinite;
         }
 
         @keyframes shimmer {
             0% { left: -100%; }
-            50% { left: 100%; }
+            40% { left: 100%; }
             100% { left: 100%; }
         }
 
         .btn-pink:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.45);
+        }
+
+        /* Instagram Button */
+        .btn-instagram {
+            background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            min-height: 48px;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease-in-out;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-instagram::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 191, 0, 0.4),
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 5s ease-in-out infinite;
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(131, 58, 180, 0.4);
         }
 
         /* Section Padding */
         .section-padding {
-            padding: 100px 24px;
+            padding: 80px 20px;
+        }
+
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 100px 24px;
+            }
         }
 
         @media (min-width: 768px) {
@@ -208,93 +279,98 @@
             }
         }
 
-        /* Logo Styles */
+        /* Logo Styles - Fixed with Flexbox Centering */
         .logo {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             position: relative;
-            display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             animation: logoBreathe 3s ease-in-out infinite;
         }
 
         @keyframes logoBreathe {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.07); }
+        }
+
+        .logo-petals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .logo .petal {
             position: absolute;
-            width: 15px;
-            height: 24px;
-            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-2) 100%);
+            width: 16px;
+            height: 26px;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, #E0127F 100%);
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            transform-origin: center bottom;
+            transform-origin: center 22px;
             opacity: 0.95;
-            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.3);
+            box-shadow: 0 2px 8px rgba(255, 20, 147, 0.3);
         }
 
-        .logo .petal:nth-child(1) { 
-            transform: rotate(0deg) translateY(-10px); 
-            top: 2px;
-            left: 50%;
-            margin-left: -7.5px;
-        }
-        .logo .petal:nth-child(2) { 
-            transform: rotate(72deg) translateY(-10px); 
-            top: 2px;
-            left: 50%;
-            margin-left: -7.5px;
-        }
-        .logo .petal:nth-child(3) { 
-            transform: rotate(144deg) translateY(-10px); 
-            top: 2px;
-            left: 50%;
-            margin-left: -7.5px;
-        }
-        .logo .petal:nth-child(4) { 
-            transform: rotate(216deg) translateY(-10px); 
-            top: 2px;
-            left: 50%;
-            margin-left: -7.5px;
-        }
-        .logo .petal:nth-child(5) { 
-            transform: rotate(288deg) translateY(-10px); 
-            top: 2px;
-            left: 50%;
-            margin-left: -7.5px;
-        }
+        .logo .petal:nth-child(1) { transform: rotate(0deg) translateY(0); }
+        .logo .petal:nth-child(2) { transform: rotate(72deg) translateY(0); }
+        .logo .petal:nth-child(3) { transform: rotate(144deg) translateY(0); }
+        .logo .petal:nth-child(4) { transform: rotate(216deg) translateY(0); }
+        .logo .petal:nth-child(5) { transform: rotate(288deg) translateY(0); }
 
         .logo .center {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 12px;
-            height: 12px;
-            background: radial-gradient(circle, var(--primary-yellow) 0%, var(--primary-yellow-2) 100%);
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle, #FFD700 0%, var(--primary-yellow) 100%);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 193, 7, 0.3);
+            box-shadow: 0 0 15px rgba(255, 191, 0, 0.7), 0 0 25px rgba(255, 191, 0, 0.4), inset 0 -2px 4px rgba(0,0,0,0.1);
             z-index: 10;
         }
 
-        /* Pricing Card */
-        .pricing-card {
+        /* Pricing Card with Hover-Lift */
+        .offering-card {
             border: var(--border-thin);
             border-radius: 30px;
-            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+        .offering-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 30px;
+            box-shadow: 0 0 0 0 rgba(255, 20, 147, 0);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .offering-card:hover,
+        .offering-card:focus-within {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(255, 20, 147, 0.2), 0 0 0 2px rgba(255, 20, 147, 0.1);
+        }
+
+        .offering-card:hover::before,
+        .offering-card:focus-within::before {
+            box-shadow: inset 0 0 30px rgba(255, 20, 147, 0.05);
         }
 
         /* Form Styles */
         .form-input {
             width: 100%;
             padding: 16px 20px;
+            min-height: 48px;
             border: 1px solid #E8E0E0;
             border-radius: 30px;
             font-family: 'Montserrat', sans-serif;
@@ -307,7 +383,7 @@
         .form-input:focus {
             outline: none;
             border-color: var(--primary-pink);
-            box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.1);
             transform: translateY(-1px);
         }
 
@@ -316,13 +392,28 @@
             font-style: italic;
         }
 
+        textarea.form-input {
+            border-radius: 20px;
+            resize: vertical;
+        }
+
         /* WhatsApp Icon */
         .whatsapp-icon {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background-color: currentColor;
             mask: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.199 2.096 3.2 5.077 4.487.709.306 1.262.487 1.694.62.745.232 1.356.185 1.871.104.57-.09.37-.372.271-.62-.09-.224-.357-.559-.57-.765-.208-.202-.03-.314.175-.497.175-.154.358-.336.531-.509.173-.173.237-.351.351-.559l.559-.994.352-.248c.594-.415 1.027-.76 1.313-1.254.15-.259.299-.588.055-.886z'/%3E%3C/svg%3E") no-repeat center;
+            mask-size: contain;
+        }
+
+        /* Instagram Icon */
+        .instagram-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-color: currentColor;
+            mask: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E") no-repeat center;
             mask-size: contain;
         }
 
@@ -331,7 +422,7 @@
             position: fixed;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.15;
+            opacity: 0.12;
             animation: floatPetal linear infinite;
         }
 
@@ -341,10 +432,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.15;
+                opacity: 0.12;
             }
             90% {
-                opacity: 0.15;
+                opacity: 0.12;
             }
             100% {
                 transform: translateY(-10vh) rotate(720deg) translateX(50px);
@@ -352,9 +443,9 @@
             }
         }
 
-        /* Footer */
+        /* Footer - Midnight Plum */
         footer {
-            background: linear-gradient(135deg, var(--footer-plum) 0%, #5A4060 100%);
+            background: linear-gradient(135deg, var(--footer-plum) 0%, #6B5A7A 50%, #7B6A8A 100%);
         }
 
         /* Magnetic Button Effect */
@@ -364,9 +455,42 @@
 
         /* Number circles in How It Works */
         .step-number {
-            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-2) 100%);
+            background: linear-gradient(135deg, var(--primary-pink) 0%, #E0127F 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .section-padding {
+                padding: 60px 16px;
+            }
+            
+            .btn-primary,
+            .btn-pink,
+            .btn-instagram {
+                width: 100%;
+                min-height: 52px;
+                font-size: 14px;
+            }
+
+            .offering-card {
+                margin-bottom: 16px;
+            }
+
+            .grid {
+                gap: 24px;
+            }
+        }
+
+        /* Ensure cards stack on mobile */
+        @media (max-width: 767px) {
+            #offerings .grid {
+                grid-template-columns: 1fr !important;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
     </style>
 </head>
@@ -402,11 +526,13 @@
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-3">
                     <div class="logo" aria-hidden="true">
-                        <div class="petal"></div>
-                        <div class="petal"></div>
-                        <div class="petal"></div>
-                        <div class="petal"></div>
-                        <div class="petal"></div>
+                        <div class="logo-petals">
+                            <div class="petal"></div>
+                            <div class="petal"></div>
+                            <div class="petal"></div>
+                            <div class="petal"></div>
+                            <div class="petal"></div>
+                        </div>
                         <div class="center"></div>
                     </div>
                     <span class="text-lg font-semibold tracking-wider" style="font-family: 'Playfair Display', serif;">PETAL MEDIA</span>
@@ -424,11 +550,13 @@
     <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden section-padding">
         <div class="max-w-4xl mx-auto text-center">
             <div class="logo mx-auto mb-6 reveal" style="animation-delay: 0.1s;">
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
+                <div class="logo-petals">
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
                 <div class="center"></div>
             </div>
             <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 reveal" style="animation-delay: 0.2s;">
@@ -438,14 +566,11 @@
                 Bespoke web pages crafted for couples. Elegant, intimate, and delivered in 24 hours.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.4s;">
-                <a href="#order" class="btn-primary inline-flex items-center gap-2 magnetic-btn">
+                <a href="#order" class="btn-primary magnetic-btn">
                     <span>Start Your Story</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
                 </a>
-                <a href="https://wa.me/919876543210" target="_blank" class="btn-pink inline-flex items-center gap-2 magnetic-btn">
-                    <span class="whatsapp-icon"></span>
+                <a href="https://wa.me/917425020630" target="_blank" class="btn-pink magnetic-btn">
+                    <span class="whatsapp-icon" style="margin-right: 8px;"></span>
                     <span>WhatsApp Order</span>
                 </a>
             </div>
@@ -482,7 +607,7 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal">Our Offerings</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Bloom -->
-                <div class="bg-white p-8 rounded-[30px] pricing-card reveal" style="animation-delay: 0.1s;">
+                <div class="bg-white p-8 rounded-[30px] offering-card reveal" style="animation-delay: 0.1s;">
                     <div class="text-center">
                         <h3 class="text-2xl font-bold mb-2" style="color: var(--accent-gold);">Bloom</h3>
                         <div class="text-3xl font-bold text-gray-900 mb-4">₹199</div>
@@ -493,12 +618,12 @@
                             <li>✓ Story Section</li>
                             <li>✓ Basic Design</li>
                         </ul>
-                        <a href="https://wa.me/919876543210?text=I%20want%20to%20order%20the%20Bloom%20package" target="_blank" class="btn-pink w-full inline-block">Order Bloom</a>
+                        <a href="https://wa.me/917425020630?text=I%20want%20to%20order%20the%20Bloom%20package" target="_blank" class="btn-pink w-full">Order Bloom</a>
                     </div>
                 </div>
 
                 <!-- Rose -->
-                <div class="bg-white p-8 rounded-[30px] pricing-card reveal" style="animation-delay: 0.2s;">
+                <div class="bg-white p-8 rounded-[30px] offering-card reveal" style="animation-delay: 0.2s;">
                     <div class="text-center">
                         <h3 class="text-2xl font-bold mb-2" style="color: var(--accent-gold);">Rose</h3>
                         <div class="text-3xl font-bold text-gray-900 mb-4">₹499</div>
@@ -509,12 +634,12 @@
                             <li>✓ Custom Design</li>
                             <li>✓ Music Integration</li>
                         </ul>
-                        <a href="https://wa.me/919876543210?text=I%20want%20to%20order%20the%20Rose%20package" target="_blank" class="btn-pink w-full inline-block">Order Rose</a>
+                        <a href="https://wa.me/917425020630?text=I%20want%20to%20order%20the%20Rose%20package" target="_blank" class="btn-pink w-full">Order Rose</a>
                     </div>
                 </div>
 
                 <!-- Eternal -->
-                <div class="bg-white p-8 rounded-[30px] pricing-card reveal" style="animation-delay: 0.3s;">
+                <div class="bg-white p-8 rounded-[30px] offering-card reveal" style="animation-delay: 0.3s;">
                     <div class="text-center">
                         <h3 class="text-2xl font-bold mb-2" style="color: var(--accent-gold);">Eternal</h3>
                         <div class="text-3xl font-bold text-gray-900 mb-4">₹699</div>
@@ -525,7 +650,7 @@
                             <li>✓ Premium Design</li>
                             <li>✓ Animation Effects</li>
                         </ul>
-                        <a href="https://wa.me/919876543210?text=I%20want%20to%20order%20the%20Eternal%20package" target="_blank" class="btn-pink w-full inline-block">Order Eternal</a>
+                        <a href="https://wa.me/917425020630?text=I%20want%20to%20order%20the%20Eternal%20package" target="_blank" class="btn-pink w-full">Order Eternal</a>
                     </div>
                 </div>
             </div>
@@ -565,11 +690,15 @@
                     <input type="file" id="photos" name="photos" class="form-input" accept="image/*" multiple>
                     <p class="text-xs text-gray-500 mt-1">You can also share photos via WhatsApp after placing the order.</p>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <button type="submit" class="btn-primary flex-1 magnetic-btn">Submit Order</button>
-                    <a href="https://wa.me/919876543210" target="_blank" class="btn-pink flex-1 inline-flex items-center justify-center gap-2 magnetic-btn">
-                        <span class="whatsapp-icon"></span>
+                <div class="flex flex-col gap-4">
+                    <button type="submit" class="btn-primary magnetic-btn">Submit Order</button>
+                    <a href="https://wa.me/917425020630" target="_blank" class="btn-pink magnetic-btn">
+                        <span class="whatsapp-icon" style="margin-right: 8px;"></span>
                         <span>Order via WhatsApp</span>
+                    </a>
+                    <a href="https://instagram.com/petalmedia.in" target="_blank" class="btn-instagram magnetic-btn">
+                        <span class="instagram-icon" style="margin-right: 8px;"></span>
+                        <span>Order via Instagram</span>
                     </a>
                 </div>
             </form>
@@ -580,17 +709,25 @@
     <footer class="section-padding text-white">
         <div class="max-w-6xl mx-auto text-center">
             <div class="logo mx-auto mb-4">
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
+                <div class="logo-petals">
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
                 <div class="center"></div>
             </div>
-            <p class="text-gray-300">Crafted with love for modern couples.</p>
-            <div class="mt-4 space-x-4">
-                <a href="https://instagram.com/petalmedia" target="_blank" class="hover:text-white transition-colors">Instagram</a>
-                <a href="https://wa.me/919876543210" target="_blank" class="hover:text-white transition-colors">WhatsApp</a>
+            <p class="text-gray-300 mb-4">Crafted with love for modern couples.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="https://instagram.com/petalmedia.in" target="_blank" class="inline-flex items-center gap-2 hover:text-white transition-colors opacity-80 hover:opacity-100">
+                    <span class="instagram-icon"></span>
+                    <span>@petalmedia.in</span>
+                </a>
+                <a href="https://wa.me/917425020630" target="_blank" class="inline-flex items-center gap-2 hover:text-white transition-colors opacity-80 hover:opacity-100">
+                    <span class="whatsapp-icon"></span>
+                    <span>WhatsApp</span>
+                </a>
             </div>
         </div>
     </footer>
