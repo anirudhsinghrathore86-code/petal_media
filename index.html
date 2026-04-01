@@ -12,34 +12,52 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- Custom Styles -->
     <style>
         :root {
-            --primary-pink: #FF007A;
-            --primary-pink-2: #FF007A;
-            --primary-pink-3: #FF007A;
-            --primary-pink-4: #FF007A;
-            --primary-pink-5: #FF007A;
-            --primary-yellow: #FFD700;
-            --text-dark: #111111;
+            --primary-pink: #E8A0BF;
+            --primary-pink-2: #F0C0D0;
+            --primary-pink-3: #F5D0E0;
+            --primary-pink-4: #FBE4EC;
+            --primary-pink-5: #FFF0F5;
+            --primary-yellow: #F5D78E;
+            --text-dark: #3D3D3D;
             --text-light: #FFFFFF;
-            --bg-dark: #000000;
-            --bg-light: #F8F8F8;
-            --border-thin: 1px solid rgba(0,0,0,0.1);
+            --bg-dark: #2D2D2D;
+            --bg-light: #FFF5F5;
+            --accent-gold: #C9A96E;
+            --border-thin: 1px solid rgba(0,0,0,0.06);
         }
 
         body {
-            font-family: 'Jost', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
             color: var(--text-dark);
-            background-color: var(--bg-light);
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 50%, #FFF8F0 100%);
             overflow-x: hidden;
+            line-height: 1.8;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        /* Grain Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
         /* Rose Cursor */
@@ -76,11 +94,11 @@
             }
         }
 
-        /* Scroll Reveal Animation */
+        /* Enhanced Scroll Reveal */
         .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
         .reveal.active {
@@ -93,46 +111,50 @@
             background-color: transparent;
             color: var(--text-dark);
             border: 1px solid var(--text-dark);
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 500;
+            padding: 14px 32px;
+            font-size: 13px;
+            font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease-in-out;
             position: relative;
             overflow: hidden;
+            border-radius: 24px;
         }
 
         .btn-primary:hover {
             background-color: var(--text-dark);
             color: var(--text-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .btn-pink {
-            background-color: transparent;
-            color: var(--primary-pink);
-            border: 1px solid var(--primary-pink);
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 500;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-2) 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 13px;
+            font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease-in-out;
+            border-radius: 24px;
         }
 
         .btn-pink:hover {
-            background-color: var(--primary-pink);
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 160, 191, 0.3);
         }
 
         /* Section Padding */
         .section-padding {
-            padding: 80px 24px;
+            padding: 100px 24px;
         }
 
         @media (min-width: 768px) {
             .section-padding {
-                padding: 120px 48px;
+                padding: 140px 48px;
             }
         }
 
@@ -141,59 +163,99 @@
             width: 40px;
             height: 40px;
             position: relative;
+            display: inline-block;
         }
 
         .logo .petal {
             position: absolute;
-            width: 12px;
-            height: 20px;
-            background-color: var(--primary-pink);
-            border-radius: 50% 50% 0 0;
-            transform-origin: bottom center;
+            width: 14px;
+            height: 22px;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-2) 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform-origin: center center;
+            opacity: 0.9;
         }
 
-        .logo .petal:nth-child(1) { transform: rotate(0deg) translate(0, 0); }
-        .logo .petal:nth-child(2) { transform: rotate(72deg) translate(0, 0); }
-        .logo .petal:nth-child(3) { transform: rotate(144deg) translate(0, 0); }
-        .logo .petal:nth-child(4) { transform: rotate(216deg) translate(0, 0); }
-        .logo .petal:nth-child(5) { transform: rotate(288deg) translate(0, 0); }
+        .logo .petal:nth-child(1) { 
+            transform: rotate(0deg) translateY(-8px); 
+            top: 4px;
+            left: 50%;
+            margin-left: -7px;
+        }
+        .logo .petal:nth-child(2) { 
+            transform: rotate(72deg) translateY(-8px); 
+            top: 4px;
+            left: 50%;
+            margin-left: -7px;
+        }
+        .logo .petal:nth-child(3) { 
+            transform: rotate(144deg) translateY(-8px); 
+            top: 4px;
+            left: 50%;
+            margin-left: -7px;
+        }
+        .logo .petal:nth-child(4) { 
+            transform: rotate(216deg) translateY(-8px); 
+            top: 4px;
+            left: 50%;
+            margin-left: -7px;
+        }
+        .logo .petal:nth-child(5) { 
+            transform: rotate(288deg) translateY(-8px); 
+            top: 4px;
+            left: 50%;
+            margin-left: -7px;
+        }
 
         .logo .center {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 12px;
-            height: 12px;
-            background-color: var(--primary-yellow);
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, var(--primary-yellow) 0%, #E8C84A 100%);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+            box-shadow: 0 0 8px rgba(245, 215, 142, 0.4);
         }
 
         /* Pricing Card */
         .pricing-card {
             border: var(--border-thin);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 24px;
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
         }
 
         .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(232, 160, 191, 0.15);
         }
 
         /* Form Styles */
         .form-input {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            font-family: 'Jost', sans-serif;
+            padding: 16px 20px;
+            border: 1px solid #E8E0E0;
+            border-radius: 16px;
+            font-family: 'Montserrat', sans-serif;
             font-size: 14px;
-            transition: border-color 0.3s ease;
+            font-weight: 300;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease-in-out;
         }
 
         .form-input:focus {
             outline: none;
             border-color: var(--primary-pink);
+            box-shadow: 0 0 0 4px rgba(232, 160, 191, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input::placeholder {
+            color: #C0B0B0;
+            font-style: italic;
         }
 
         /* WhatsApp Icon */
@@ -201,7 +263,7 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            background-color: var(--primary-pink);
+            background-color: currentColor;
             mask: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.199 2.096 3.2 5.077 4.487.709.306 1.262.487 1.694.62.745.232 1.356.185 1.871.104.57-.09.37-.372.271-.62-.09-.224-.357-.559-.57-.765-.208-.202-.03-.314.175-.497.175-.154.358-.336.531-.509.173-.173.237-.351.351-.559l.559-.994.352-.248c.594-.415 1.027-.76 1.313-1.254.15-.259.299-.588.055-.886z'/%3E%3C/svg%3E") no-repeat center;
             mask-size: contain;
         }
@@ -268,7 +330,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="section-padding bg-white">
+    <section id="how-it-works" class="section-padding">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal">How It Works</h2>
             <div class="grid md:grid-cols-3 gap-8">
@@ -292,14 +354,14 @@
     </section>
 
     <!-- Offerings Section -->
-    <section id="offerings" class="section-padding bg-gray-50">
+    <section id="offerings" class="section-padding">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal">Our Offerings</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Bloom -->
                 <div class="bg-white p-8 rounded-lg pricing-card reveal" style="animation-delay: 0.1s;">
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold mb-2">Bloom</h3>
+                        <h3 class="text-2xl font-bold mb-2" style="color: var(--accent-gold);">Bloom</h3>
                         <div class="text-3xl font-bold text-gray-900 mb-4">₹199</div>
                         <p class="text-gray-600 mb-6">Perfect for a simple, elegant page.</p>
                         <ul class="text-left space-y-2 mb-8 text-gray-700">
@@ -315,7 +377,7 @@
                 <!-- Rose -->
                 <div class="bg-white p-8 rounded-lg pricing-card reveal" style="animation-delay: 0.2s;">
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold mb-2">Rose</h3>
+                        <h3 class="text-2xl font-bold mb-2" style="color: var(--accent-gold);">Rose</h3>
                         <div class="text-3xl font-bold text-gray-900 mb-4">₹499</div>
                         <p class="text-gray-600 mb-6">Popular choice with more features.</p>
                         <ul class="text-left space-y-2 mb-8 text-gray-700">
@@ -331,7 +393,7 @@
                 <!-- Eternal -->
                 <div class="bg-white p-8 rounded-lg pricing-card reveal" style="animation-delay: 0.3s;">
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold mb-2">Eternal</h3>
+                        <h3 class="text-2xl font-bold mb-2" style="color: var(--accent-gold);">Eternal</h3>
                         <div class="text-3xl font-bold text-gray-900 mb-4">₹699</div>
                         <p class="text-gray-600 mb-6">Ultimate experience, no limits.</p>
                         <ul class="text-left space-y-2 mb-8 text-gray-700">
@@ -348,9 +410,10 @@
     </section>
 
     <!-- Order Section -->
-    <section id="order" class="section-padding bg-white">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal">Place Your Order</h2>
+    <section id="order" class="section-padding">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 reveal">Place Your Order</h2>
+            <p class="text-center text-gray-500 mb-12 reveal" style="font-style: italic;">Fill out the details below to begin your love story</p>
             <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
