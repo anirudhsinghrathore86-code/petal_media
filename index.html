@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petal Media | Custom Web Pages for Lovers</title>
+    <meta name="description" content="Create a bespoke web page for your love story. Handcrafted, elegant, and delivered in 24 hours.">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-pink: #FF007A;
+            --primary-pink-2: #FF007A;
+            --primary-pink-3: #FF007A;
+            --primary-pink-4: #FF007A;
+            --primary-pink-5: #FF007A;
+            --primary-yellow: #FFD700;
+            --text-dark: #111111;
+            --text-light: #FFFFFF;
+            --bg-dark: #000000;
+            --bg-light: #F8F8F8;
+            --border-thin: 1px solid rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* Rose Cursor */
+        .rose-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--primary-pink);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+            mix-blend-mode: difference;
+            display: none;
+        }
+
+        .rose-cursor::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Hide cursor on mobile */
+        @media (max-width: 768px) {
+            .rose-cursor {
+                display: none !important;
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Button Styles */
+        .btn-primary {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--text-dark);
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+        }
+
+        .btn-pink {
+            background-color: transparent;
+            color: var(--primary-pink);
+            border: 1px solid var(--primary-pink);
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pink:hover {
+            background-color: var(--primary-pink);
+            color: white;
+        }
+
+        /* Section Padding */
+        .section-padding {
+            padding: 80px 24px;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 120px 48px;
+            }
+        }
+
+        /* Logo Styles */
+        .logo {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .logo .petal {
+            position: absolute;
+            width: 12px;
+            height: 20px;
+            background-color: var(--primary-pink);
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom center;
+        }
+
+        .logo .petal:nth-child(1) { transform: rotate(0deg) translate(0, 0); }
+        .logo .petal:nth-child(2) { transform: rotate(72deg) translate(0, 0); }
+        .logo .petal:nth-child(3) { transform: rotate(144deg) translate(0, 0); }
+        .logo .petal:nth-child(4) { transform: rotate(216deg) translate(0, 0); }
+        .logo .petal:nth-child(5) { transform: rotate(288deg) translate(0, 0); }
+
+        .logo .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-yellow);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+        }
+
+        /* Pricing Card */
+        .pricing-card {
+            border: var(--border-thin);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        /* Form Styles */
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            font-family: 'Jost', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+        }
+
+        /* WhatsApp Icon */
+        .whatsapp-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-pink);
+            mask: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.199 2.096 3.2 5.077 4.487.709.306 1.262.487 1.694.62.745.232 1.356.185 1.871.104.57-.09.37-.372.271-.62-.09-.224-.357-.559-.57-.765-.208-.202-.03-.314.175-.497.175-.154.358-.336.531-.509.173-.173.237-.351.351-.559l.559-.994.352-.248c.594-.415 1.027-.76 1.313-1.254.15-.259.299-.588.055-.886z'/%3E%3C/svg%3E") no-repeat center;
+            mask-size: contain;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Rose Cursor -->
+    <div id="cursor" class="rose-cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="logo" aria-hidden="true">
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="center"></div>
+                    </div>
+                    <span class="text-lg font-semibold tracking-wider">PETAL MEDIA</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm">
+                    <a href="#how-it-works" class="hover:text-gray-600 transition-colors">How It Works</a>
+                    <a href="#offerings" class="hover:text-gray-600 transition-colors">Offerings</a>
+                    <a href="#order" class="hover:text-gray-600 transition-colors">Order</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden section-padding">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="logo mx-auto mb-6 reveal" style="animation-delay: 0.1s;">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 reveal" style="animation-delay: 0.2s;">
+                For the Lovers
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto reveal" style="animation-delay: 0.3s;">
+                Bespoke web pages crafted for couples. Elegant, intimate, and delivered in 24 hours.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.4s;">
+                <a href="#order" class="btn-primary inline-flex items-center gap-2">
+                    <span>Start Your Story</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="https://wa.me/919876543210" target="_blank" class="btn-pink inline-flex items-center gap-2">
+                    <span class="whatsapp-icon"></span>
+                    <span>WhatsApp Order</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-padding bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal">How It Works</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center reveal" style="animation-delay: 0.1s;">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center text-2xl font-bold text-gray-600">1</div>
+                    <h3 class="text-xl font-semibold mb-2">Order</h3>
+                    <p class="text-gray-600">Choose your tier and share your details via our form or WhatsApp.</p>
+                </div>
+                <div class="text-center reveal" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center text-2xl font-bold text-gray-600">2</div>
+                    <h3 class="text-xl font-semibold mb-2">Share Details</h3>
+                    <p class="text-gray-600">Tell us your names, story, and upload photos. We handle the rest.</p>
+                </div>
+                <div class="text-center reveal" style="animation-delay: 0.3s;">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center text-2xl font-bold text-gray-600">3</div>
+                    <h3 class="text-xl font-semibold mb-2">Live in 24h</h3>
+                    <p class="text-gray-600">Your custom page goes live within 24 hours. Share it with the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offerings Section -->
+    <section id="offerings" class="section-padding bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal">Our Offerings</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Bloom -->
+                <div class="bg-white p-8 rounded-lg pricing-card reveal" style="animation-delay: 0.1s;">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-2">Bloom</h3>
+                        <div class="text-3xl font-bold text-gray-900 mb-4">₹199</div>
+                        <p class="text-gray-600 mb-6">Perfect for a simple, elegant page.</p>
+                        <ul class="text-left space-y-2 mb-8 text-gray-700">
+                            <li>✓ Custom URL</li>
+                            <li>✓ 2 Photos</li>
+                            <li>✓ Story Section</li>
+                            <li>✓ Basic Design</li>
+                        </ul>
+                        <a href="https://wa.me/919876543210?text=I%20want%20to%20order%20the%20Bloom%20package" target="_blank" class="btn-pink w-full inline-block">Order Bloom</a>
+                    </div>
+                </div>
+
+                <!-- Rose -->
+                <div class="bg-white p-8 rounded-lg pricing-card reveal" style="animation-delay: 0.2s;">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-2">Rose</h3>
+                        <div class="text-3xl font-bold text-gray-900 mb-4">₹499</div>
+                        <p class="text-gray-600 mb-6">Popular choice with more features.</p>
+                        <ul class="text-left space-y-2 mb-8 text-gray-700">
+                            <li>✓ Everything in Bloom</li>
+                            <li>✓ 5 Photos</li>
+                            <li>✓ Custom Design</li>
+                            <li>✓ Music Integration</li>
+                        </ul>
+                        <a href="https://wa.me/919876543210?text=I%20want%20to%20order%20the%20Rose%20package" target="_blank" class="btn-pink w-full inline-block">Order Rose</a>
+                    </div>
+                </div>
+
+                <!-- Eternal -->
+                <div class="bg-white p-8 rounded-lg pricing-card reveal" style="animation-delay: 0.3s;">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-2">Eternal</h3>
+                        <div class="text-3xl font-bold text-gray-900 mb-4">₹699</div>
+                        <p class="text-gray-600 mb-6">Ultimate experience, no limits.</p>
+                        <ul class="text-left space-y-2 mb-8 text-gray-700">
+                            <li>✓ Everything in Rose</li>
+                            <li>✓ Unlimited Photos</li>
+                            <li>✓ Premium Design</li>
+                            <li>✓ Animation Effects</li>
+                        </ul>
+                        <a href="https://wa.me/919876543210?text=I%20want%20to%20order%20the%20Eternal%20package" target="_blank" class="btn-pink w-full inline-block">Order Eternal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="section-padding bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal">Place Your Order</h2>
+            <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="name1">Your Name</label>
+                        <input type="text" id="name1" name="name1" class="form-input" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="name2">Partner's Name</label>
+                        <input type="text" id="name2" name="name2" class="form-input" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="story">Your Love Story (150-200 words)</label>
+                    <textarea id="story" name="story" rows="6" class="form-input" placeholder="Tell us how you met, your journey, and what makes your love special..." required></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="package">Package</label>
+                    <select id="package" name="package" class="form-input">
+                        <option value="Bloom - ₹199">Bloom - ₹199</option>
+                        <option value="Rose - ₹499">Rose - ₹499</option>
+                        <option value="Eternal - ₹699">Eternal - ₹699</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="photos">Photo Upload (Optional)</label>
+                    <input type="file" id="photos" name="photos" class="form-input" accept="image/*" multiple>
+                    <p class="text-xs text-gray-500 mt-1">You can also share photos via WhatsApp after placing the order.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button type="submit" class="btn-primary flex-1">Submit Order</button>
+                    <a href="https://wa.me/919876543210" target="_blank" class="btn-pink flex-1 inline-flex items-center justify-center gap-2">
+                        <span class="whatsapp-icon"></span>
+                        <span>Order via WhatsApp</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section-padding bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="logo mx-auto mb-4">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <p class="text-gray-400">Crafted with love for modern couples.</p>
+            <div class="mt-4 space-x-4">
+                <a href="https://instagram.com/petalmedia" target="_blank" class="hover:text-white transition-colors">Instagram</a>
+                <a href="https://wa.me/919876543210" target="_blank" class="hover:text-white transition-colors">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Rose Cursor Logic
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hide cursor on click
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.5)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+
+        // Scroll Reveal Logic
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
